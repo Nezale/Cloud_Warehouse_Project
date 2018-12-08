@@ -8,5 +8,5 @@ class Order(models.Model):
     quantity = models.IntegerField
     unit_price = models.DecimalField(max_digits=5,   decimal_places=2)
     discount = models.DecimalField(max_digits=4, decimal_places=2)
-    shipping_method = models.ForeignKey(ShippingMethod, on_delete=models.SET_NULL)
+    shipping_method = models.ForeignKey(ShippingMethod, null=True, on_delete=models.SET_NULL)
     payment = models.OneToOneField(Payment, on_delete=models.PROTECT)
