@@ -13,3 +13,6 @@ class Component(models.Model):
         ('OTHER', 'OTHER'),
     )
     component_type = models.CharField(max_length=10, choices=TYPE_OF_COMPONENT)
+
+    def __str__(self):
+        return self.name

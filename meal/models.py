@@ -14,3 +14,6 @@ class Meal(models.Model):
         ('OTHER', 'OTHER'),
     )
     meal_type = models.CharField(max_length=8, choices=TYPE_OF_MEAL)
+
+    def __str__(self):
+        return self.name
