@@ -1,5 +1,12 @@
-{{ meal.name }}
+<h2>Posiłek: {{ meal.name }}</h2>
 
-<h2><span id="rowName">Posiłek: {{ meal.name }}</span></h2>
-<h2><span id="rowName">Cena: {{ meal.price }}</span></h2>
-<h2><span id="rowName">Rodzaj posiłku: {{ meal.meal_type }}</span></h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<h2>Składniki: </h2>
+{% for component in meal.components.all %}
+    <ul>
+        <li>{{ component.name }}</li>
+    </ul>
+{% endfor %}
+<h2>Cena: {{ meal.price }}</h2>
+<h2>Rodzaj posiłku: {{ meal.meal_type }}</h2>

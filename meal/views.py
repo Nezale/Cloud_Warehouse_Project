@@ -20,5 +20,5 @@ def detail(request, id):
 
 def results(request,id):
     response = "You are looking at the result of meal %s"
-    return HttpResponse(response % meal_id)
+    return HttpResponse(response % id)
 

@@ -1,7 +1,7 @@
 {% if meals %}
     <ul>
         {%  for meal in meals %}
-            <li><a href="/meal/{{meal.id}}/">{{ meal.name }}</a></li>
+            <li><a href="{% url 'meal:detail' meal.id %}">{{ meal.name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
