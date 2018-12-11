@@ -12,4 +12,4 @@ class Order(models.Model):
     payment = models.OneToOneField(Payment, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.customer + " " + self.order_date
+        return self.order_date

@@ -10,3 +10,5 @@ class Payment(models.Model):
     creditCardEXPCode = models.CharField(max_length=7)
     cardHoldersName = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.paymentDate

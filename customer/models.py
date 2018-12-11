@@ -2,13 +2,13 @@ from django.db import models
 from address.models import Address
 from django.contrib.auth.models import User
 from order.models import Order
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=25)
-    surname = models.CharField(max_length=30)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=12)
-    email = models.CharField(max_length=30)
     address = models.OneToOneField(Address,
                                    on_delete=models.PROTECT,
                                    primary_key=True,
@@ -19,3 +19,14 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name + " " + self.surname
+
+
+@receiver(post_save, sender=User)
+def create_user_customer(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_customer(sender, instance, **kwargs):
+    instance.customer.save()
