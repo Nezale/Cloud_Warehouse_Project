@@ -8,14 +8,17 @@ from django.dispatch import receiver
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=12, blank=True)
     address = models.OneToOneField(Address,
-                                   on_delete=models.PROTECT,
+                                   on_delete=models.CASCADE,
                                    primary_key=True,
+                                   blank=True
                                    )
-    company_name = models.CharField(max_length=50)
-    orders = models.ForeignKey(Order, null=True, on_delete=models.CASCADE)
-    password = User.password
+    company_name = models.CharField(max_length=50, blank=True)
+    orders = models.ForeignKey(Order,
+                               null=True,
+                               on_delete=models.CASCADE,
+                               blank=True)
 
     def __str__(self):
         return self.name + " " + self.surname
