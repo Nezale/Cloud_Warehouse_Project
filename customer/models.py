@@ -11,8 +11,8 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=12, blank=True)
     address = models.OneToOneField(Address,
                                    on_delete=models.CASCADE,
-                                   primary_key=True,
-                                   blank=True
+                                   blank=True,
+                                   null=True
                                    )
     company_name = models.CharField(max_length=50, blank=True)
     orders = models.ForeignKey(Order,
@@ -21,7 +21,7 @@ class Customer(models.Model):
                                blank=True)
 
     def __str__(self):
-        return self.name + " " + self.surname
+        return self.user.first_name + " " + self.user.last_name
 
 
 @receiver(post_save, sender=User)
@@ -33,3 +33,5 @@ def create_user_customer(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_customer(sender, instance, **kwargs):
     instance.customer.save()
+
+
