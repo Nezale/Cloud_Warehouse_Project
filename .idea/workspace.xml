@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77869818-938c-4092-9a73-d6dd2f0c4274" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/login/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/meal/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/meal/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/meal/templates/meal/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/meal/templates/meal/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/templates/pracownik.html" beforeDir="false" afterPath="$PROJECT_DIR$/login/templates/pracownik.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,13 +32,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="223" />
+          <entry key="html" value="224" />
           <entry key="py" value="320" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="223" />
+          <entry key="HTML" value="224" />
           <entry key="Python" value="320" />
         </counts>
       </usages-collector>
@@ -74,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/login/templates/pracownik.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -631,7 +628,7 @@
     <entry file="file://$PROJECT_DIR$/login/templates/pracownik.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
