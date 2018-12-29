@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 from django.utils import timezone
-
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -17,6 +17,9 @@ def main_login(request):
             if form.is_valid():
                 user = form.get_user()
                 login(request, user)
+                user = User.objects.get(id=user.id)
+                if user.groups.filter(name='pracownik').exists():
+                    return render(request, 'pracownik.html', {'form': form})
                 return render(request, 'indexLogin.html', {'form': form})
             else:
                 return render(request, 'indexLogin.html', {'form': form})
