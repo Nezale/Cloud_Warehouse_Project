@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Customer
+from order.models import Order
 
 from customer.forms import UserForm, CustomerForm
 
@@ -31,3 +33,13 @@ def update_customer(request):
         'user_form': user_form,
         'customer_form': customer_form
     })
+
+
+def my_profile(request):
+    my_customer_profile = Customer.objects.filter(user=request.user).first()
+    my_orders = Order.objects.filter(is_ordered=True, owner=my_customer_profile)
+    context = {
+        'my_orders': my_orders
+    }
+
+    return render(request, "profile.html", context)
