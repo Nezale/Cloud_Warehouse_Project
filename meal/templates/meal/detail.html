@@ -10,3 +10,9 @@
 {% endfor %}
 <h2>Cena: {{ meal.price }}</h2>
 <h2>Rodzaj posiłku: {{ meal.meal_type }}</h2>
+<a href="{% url 'order:order_summary'  %}" class="btn btn warning">
+    Go to cart
+</a>
+<a href="{% url 'order:add_to_cart' object.id %}" class="btn btn warning">
+    Add to cart
+</a>

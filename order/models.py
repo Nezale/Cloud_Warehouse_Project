@@ -6,13 +6,21 @@ from component.models import Component
 from customer.models import Customer
 
 
+class OrderMeal(models.Model):
+    meal = models.OneToOneField(Meal, on_delete=models.SET_NULL, null=True)
+    date_added = models.DateTimeField(auto_now=True)
+    date_ordered = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.meal.name
+
+
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(Customer, on_delete= models.SET_NULL, null=True)
-    meals = models.ManyToManyField(Meal, on_delete=models.SET_NULL, null=True)
-    quantity = models.IntegerField
-    unit_price = models.DecimalField(max_digits=5,   decimal_places=2)
-    discount = models.DecimalField(max_digits=4, decimal_places=2)
+    meals = models.ManyToManyField(OrderMeal)
+    ref_code = models.CharField(max_length=15)
+    is_ordered = models.BooleanField(default=False)
     shipping_method = models.ForeignKey(ShippingMethod, null=True, on_delete=models.SET_NULL)
     payment = models.OneToOneField(Payment, on_delete=models.PROTECT)
 
@@ -24,3 +32,18 @@ class Order(models.Model):
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_date)
+
+
+class Transaction(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    token = models.CharField(max_length=120)
+    order_id= models.CharField(max_length=120)
+    amount = models.DecimalField(max_digits=100, decimal_places=2)
+    success = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self):
+        return self.order_id
+
+    class Meta:
+        ordering = ['-timestamp']
