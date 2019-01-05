@@ -2,12 +2,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from customer.models import Customer
 from meal.models import Meal
 from order.models import Order, Transaction, OrderMeal
 from order.extras import generate_order_id, transact, generate_client_token
+from customer.models import Customer
 
 import datetime
 import stripe
@@ -37,6 +36,7 @@ def add_to_cart(request, **kwargs):
     messages.info(request, "Meal added to cart")
     return redirect(reverse('meals:meals-list'))
 
+
 @login_required
 def delete_from_cart(request, meal_id):
     meal_to_delete = OrderMeal.objects.filter(pk=meal_id)
@@ -56,13 +56,12 @@ def order_details(request, **kwargs):
     return render(request, 'order/order_summary.html',context)
 
 
-
 def checkout(request, **kwargs):
     customer_token = generate_client_token()
     existing_order = get_customer_pending_order(request)
     publish_key = settings.STRIPE_PUBLISHABLE_KEY
     if request.method == 'POST':
-        token = request.POST.get('stripeToken',False)
+        token = request.POST.get('stripeToken', False)
         if token:
             try:
                 charge = stripe.Charge.create(
