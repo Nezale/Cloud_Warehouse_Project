@@ -129,3 +129,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 LOGIN_REDIRECT_URL = '/meal'
 STATIC_URL = '/static/'
+
+STRIPE_SECRET_KEY = '2131231233'
+STRIPE_PUBLISHABLE_KEY = '234242423'

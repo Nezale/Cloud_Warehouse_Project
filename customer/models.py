@@ -1,7 +1,6 @@
 from django.db import models
 from address.models import Address
 from django.contrib.auth.models import User
-from order.models import Order
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -15,9 +14,7 @@ class Customer(models.Model):
                                    null=True
                                    )
     company_name = models.CharField(max_length=50, blank=True)
-    orders = models.ForeignKey(Order,
-                               null=True,
-                               on_delete=models.CASCADE,
+    orders = models.ManyToManyField('order.Order',
                                blank=True)
 
     def __str__(self):

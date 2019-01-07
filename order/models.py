@@ -7,7 +7,7 @@ from customer.models import Customer
 
 
 class OrderMeal(models.Model):
-    meal = models.OneToOneField(Meal, on_delete=models.SET_NULL, null=True)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
@@ -17,12 +17,12 @@ class OrderMeal(models.Model):
 
 class Order(models.Model):
     order_date = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(Customer, on_delete= models.SET_NULL, null=True)
-    meals = models.ManyToManyField(OrderMeal)
-    ref_code = models.CharField(max_length=15)
+    owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    meals = models.ManyToManyField(OrderMeal, null=True, blank=True)
+    ref_code = models.CharField(max_length=15, null=True)
     is_ordered = models.BooleanField(default=False)
     shipping_method = models.ForeignKey(ShippingMethod, null=True, on_delete=models.SET_NULL)
-    payment = models.OneToOneField(Payment, on_delete=models.PROTECT)
+    payment = models.OneToOneField(Payment, on_delete=models.PROTECT, null=True)
 
     def get_cart_products(self):
         return self.meals.all()

@@ -25,16 +25,18 @@ def get_customer_pending_order(request):
 @login_required
 def add_to_cart(request, **kwargs):
     customer = get_object_or_404(Customer, user=request.user)
-    meal = Meal.objects.filter(id=kwargs.get('meal_id', "")).first()
-    order_meal = OrderMeal.objects.get_or_create(meal=meal)
+    meal = Meal.objects.filter(id=kwargs.get('item_id', "")).first()
+    order_meal = OrderMeal.objects.create(meal=meal)
+    order_meal.save()
     customer_order, status = Order.objects.get_or_create(owner=customer, is_ordered=False)
-    customer.meals.add(order_meal)
+    customer_order.meals.add(order_meal)
     if status:
         customer_order.ref_code = generate_order_id()
         customer_order.save()
 
+    customer.orders.add(customer_order)
     messages.info(request, "Meal added to cart")
-    return redirect(reverse('meals:meals-list'))
+    return redirect(reverse('meal:meals-list'))
 
 
 @login_required
@@ -53,7 +55,7 @@ def order_details(request, **kwargs):
     context = {
         'order': existing_order
     }
-    return render(request, 'order/order_summary.html',context)
+    return render(request, 'order_summary.html',context)
 
 
 def checkout(request, **kwargs):

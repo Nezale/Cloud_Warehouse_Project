@@ -4,6 +4,7 @@ import string
 from datetime import date
 import datetime
 import braintree
+import os
 
 
 def generate_order_id():
@@ -13,11 +14,11 @@ def generate_order_id():
 
 
 gateway = braintree.BraintreeGateway(
-    braintree.Configuration(
-        environment=settings.BT_ENVIRONMENT,
-        merchant_id=settings.BT_MERCHANT_ID,
-        public_key=settings.BT_PUBLIC_KEY,
-        private_key=settings.BT_PRIVATE_KEY
+    braintree.Configuration.configure(
+        os.environ.get('BT_ENVIRONMENT', braintree.Environment.Sandbox),
+        os.environ.get('BT_MERCHANT_ID', 'your_sandbox_merchant_id'),
+        os.environ.get('BT_PUBLIC_KEY', 'your_sandbox_public_key'),
+        os.environ.get('BT_PRIVATE_KEY', 'your_sandbox_private_key')
     )
 )
 
