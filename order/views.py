@@ -40,8 +40,8 @@ def add_to_cart(request, **kwargs):
 
 
 @login_required
-def delete_from_cart(request, meal_id):
-    meal_to_delete = OrderMeal.objects.filter(pk=meal_id)
+def delete_from_cart(request, item_id):
+    meal_to_delete = OrderMeal.objects.filter(pk=item_id)
     if meal_to_delete.exists():
         meal_to_delete[0].delete()
         messages.info(request,"Meal has been deleted from cart")
