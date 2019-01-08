@@ -130,5 +130,12 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = '/meal'
 STATIC_URL = '/static/'
 
-STRIPE_SECRET_KEY = '2131231233'
-STRIPE_PUBLISHABLE_KEY = '234242423'
+# Braintree configuration
+BRAINTREE_ENVIRONMENT= 'sandbox'
+BRAINTREE_MERCHANT_ID = '5hy33f73yvhjp7cj'
+BRAINTREE_PUBLIC_KEY = 'wbvjrx3dmqcx3t6m'
+BRAINTREE_PRIVATE_KEY = '8ebafc05be74b4cbf9bf1e89095afc08'
+
+# Stripe configuration
+STRIPE_SECRET_KEY = 'sk_test_tQdsH7qsgxs6xU6nhXD6auzn'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_USlCay69N1iSdc5dsKKgZDtu'

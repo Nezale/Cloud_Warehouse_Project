@@ -58,30 +58,31 @@ def order_details(request, **kwargs):
     return render(request, 'order_summary.html',context)
 
 
+@login_required()
 def checkout(request, **kwargs):
     customer_token = generate_client_token()
     existing_order = get_customer_pending_order(request)
     publish_key = settings.STRIPE_PUBLISHABLE_KEY
     if request.method == 'POST':
-        token = request.POST.get('stripeToken', False)
-        if token:
-            try:
-                charge = stripe.Charge.create(
-                    amount=100*existing_order.get_cart_total(),
-                    currency='pln',
-                    descriptions='cloud_meals_warehouse',
-                    source=token,
-                )
-
-                return redirect(reverse('order:update_records',
-                        kwargs={
-                            'token': token
-                        })
-                        )
-            except stripe.CardError as e:
-                messages.info(request, "Your card has been declined")
-
-        else:
+        # token = request.POST.get('stripeToken', False)
+        # if token:
+        #     try:
+        #         charge = stripe.Charge.create(
+        #             amount=100*existing_order.get_cart_total(),
+        #             currency='pln',
+        #             descriptions='cloud_meals_warehouse',
+        #             source=token,
+        #         )
+        #
+        #         return redirect(reverse('order:update_records',
+        #                 kwargs={
+        #                     'token': token
+        #                 })
+        #                 )
+        #     except stripe.CardError as e:
+        #         messages.info(request, "Your card has been declined")
+        #
+        # else:
             result = transact({
                 'amount': existing_order.get_cart_total(),
                 'payment_method_nonce': request.POST['payment_method_nonce'],
@@ -108,7 +109,7 @@ def checkout(request, **kwargs):
         'STRIPE_PUBLISHABLE_KEY': publish_key
     }
 
-    return render(request, 'order/checkout.html', context)
+    return render(request, 'checkout.html', context)
 
 
 @login_required
@@ -140,7 +141,7 @@ def update_transaction_records(request, token):
     transaction.save()
 
     messages.info(request, "Thank you! Your purchase was successfull !")
-    return redirect(reverse('customer:my_profile'))
+    return redirect(reverse('customer:profile'))
 
 
 @login_required

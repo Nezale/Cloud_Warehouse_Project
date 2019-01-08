@@ -13,13 +13,12 @@ def generate_order_id():
     return date_str + rand_str
 
 
-gateway = braintree.BraintreeGateway(
-    braintree.Configuration.configure(
-        os.environ.get('BT_ENVIRONMENT', braintree.Environment.Sandbox),
-        os.environ.get('BT_MERCHANT_ID', 'your_sandbox_merchant_id'),
-        os.environ.get('BT_PUBLIC_KEY', 'your_sandbox_public_key'),
-        os.environ.get('BT_PRIVATE_KEY', 'your_sandbox_private_key')
-    )
+gateway = braintree.BraintreeGateway(braintree.Configuration(
+                            environment=settings.BRAINTREE_ENVIRONMENT,
+                            merchant_id=settings.BRAINTREE_MERCHANT_ID,
+                            public_key=settings.BRAINTREE_PUBLIC_KEY,
+                            private_key=settings.BRAINTREE_PRIVATE_KEY
+         )
 )
 
 

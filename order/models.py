@@ -28,7 +28,7 @@ class Order(models.Model):
         return self.meals.all()
 
     def get_cart_total(self):
-        return sum([ meal.price for meal in self.meals.all()])
+        return sum([meal.meal.price for meal in self.meals.all()])
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_date)
@@ -37,7 +37,7 @@ class Order(models.Model):
 class Transaction(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     token = models.CharField(max_length=120)
-    order_id= models.CharField(max_length=120)
+    order_id = models.CharField(max_length=120)
     amount = models.DecimalField(max_digits=100, decimal_places=2)
     success = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
