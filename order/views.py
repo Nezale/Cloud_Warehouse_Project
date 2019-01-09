@@ -55,7 +55,7 @@ def order_details(request, **kwargs):
     context = {
         'order': existing_order
     }
-    return render(request, 'order_summary.html',context)
+    return render(request, 'order_summary.html', context)
 
 
 @login_required()
@@ -64,25 +64,6 @@ def checkout(request, **kwargs):
     existing_order = get_customer_pending_order(request)
     publish_key = settings.STRIPE_PUBLISHABLE_KEY
     if request.method == 'POST':
-        # token = request.POST.get('stripeToken', False)
-        # if token:
-        #     try:
-        #         charge = stripe.Charge.create(
-        #             amount=100*existing_order.get_cart_total(),
-        #             currency='pln',
-        #             descriptions='cloud_meals_warehouse',
-        #             source=token,
-        #         )
-        #
-        #         return redirect(reverse('order:update_records',
-        #                 kwargs={
-        #                     'token': token
-        #                 })
-        #                 )
-        #     except stripe.CardError as e:
-        #         messages.info(request, "Your card has been declined")
-        #
-        # else:
             result = transact({
                 'amount': existing_order.get_cart_total(),
                 'payment_method_nonce': request.POST['payment_method_nonce'],
@@ -126,22 +107,19 @@ def update_transaction_records(request, token):
 
     customer_profile = get_object_or_404(Customer, user=request.user)
 
-
-    # order_products = [item.meal for item in order_meals]
-    # trzeba dodac jakos order w tym miejscu do customera jeszcze nie wiem jak, jak ktos wie to zrobcie to plx
-    #customer_profile.orders.add(*)
+    customer_profile.orders.add(order_to_purchase)
 
     customer_profile.save()
 
     transaction = Transaction(customer=request.user.customer,
-                              token= token,
-                              order_id = order_to_purchase.id,
-                              amount= order_to_purchase.get_cart_total(),
-                              success= True)
+                              token=token,
+                              order_id=order_to_purchase.id,
+                              amount=order_to_purchase.get_cart_total(),
+                              success=True)
     transaction.save()
 
     messages.info(request, "Thank you! Your purchase was successfull !")
-    return redirect(reverse('customer:profile'))
+    return redirect(reverse('customer:my_profile'))
 
 
 @login_required

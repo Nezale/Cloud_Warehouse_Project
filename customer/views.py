@@ -22,10 +22,10 @@ def update_customer(request):
         if user_form.is_valid() and customer_form.is_valid():
             user_form.save()
             customer_form.save()
-            messages.success(request, ('Your profile was successfully updated'))
+            messages.success(request, 'Your profile was successfully updated')
             return redirect('settings:profile')
         else:
-            messages.error(request, ('Please correct the error below'))
+            messages.error(request, 'Please correct the error below')
     else:
         user_form = UserForm(request.POST, instance=request.user)
         customer_form = CustomerForm(request.POST, instance=request.user.customer)
