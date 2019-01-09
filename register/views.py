@@ -35,7 +35,7 @@ def register_page(request):
                                 password=raw_password)
             login(request, user)
 
-            return redirect('login/')
+            return redirect('/login')
     else:
         form = SignUpForm()
     return render(request, 'register.html', {'form': form})

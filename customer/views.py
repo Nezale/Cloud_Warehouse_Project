@@ -37,7 +37,7 @@ def update_customer(request):
 
 def my_profile(request):
     my_customer_profile = Customer.objects.filter(user=request.user).first()
-    my_orders = Order.objects.filter(is_ordered=True, owner=my_customer_profile)
+    my_orders = Order.objects.all()
     context = {
         'my_orders': my_orders
     }

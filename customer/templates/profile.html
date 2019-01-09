@@ -9,13 +9,13 @@
         <th>Meals</th>
         <th>Price</th>
       </tr>
-      {% for order in orders %}
+      {% for order in my_orders %}
         <tr>
           <td>{{ order.date_ordered }}</td>
           <td>{{ order.ref_code }}</td>
           <td>
         	{% for item in order.meals.all %}
-        		{{ item.meal.name }}
+        		{{ item }}
       		{% endfor %}
       	  </td>
           <td>${{ order.get_cart_total }}</td>

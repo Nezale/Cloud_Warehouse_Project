@@ -106,7 +106,8 @@ def update_transaction_records(request, token):
     order_meals.update(date_ordered=datetime.datetime.now())
 
     customer_profile = get_object_or_404(Customer, user=request.user)
-
+    #order_products = [item for item in order_meals]
+    #customer_profile.orders.add(*order_products)
     customer_profile.orders.add(order_to_purchase)
 
     customer_profile.save()
@@ -119,7 +120,7 @@ def update_transaction_records(request, token):
     transaction.save()
 
     messages.info(request, "Thank you! Your purchase was successfull !")
-    return redirect(reverse('customer:my_profile'))
+    return redirect('/customer/profile')
 
 
 @login_required
