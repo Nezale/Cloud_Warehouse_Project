@@ -4,10 +4,13 @@ from payment.models import Payment
 from meal.models import Meal
 from component.models import Component
 from customer.models import Customer
+from .signals import orderOrdered
+from django.db.models.signals import post_save
 
 
 class OrderMeal(models.Model):
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField(null=True)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
@@ -24,11 +27,18 @@ class Order(models.Model):
     shipping_method = models.ForeignKey(ShippingMethod, null=True, on_delete=models.SET_NULL)
     payment = models.OneToOneField(Payment, on_delete=models.PROTECT, null=True)
 
+    def decrease_component_and_order_quantity(self, meal, component):
+        orderOrdered.send(sender=self.__class__, meal=meal, component=component)
+        for OrderMeal in self.meals:
+            OrderMeal.meal.decrease_meal_quantity()
+            for Component in self.meals.meal.components:
+                Component.decrease_component_amount()
+
     def get_cart_products(self):
         return self.meals.all()
 
     def get_cart_total(self):
-        return sum([meal.meal.price for meal in self.meals.all()])
+        return sum([meal.meal.price*meal.quantity for meal in self.meals.all()])
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_date)

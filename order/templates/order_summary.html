@@ -15,6 +15,7 @@
           <td>{{ forloop.counter }}</td>
           <td>
             {{ item.meal.name }}
+            {{ item.quantity }}
             <span class="pull-right">
               <a href="{% url 'order:delete_item' item.id %}" data-balloon="remove this item from cart" class="text-danger" onclick="return confirm_delete();">
                 <i class="fas fa-trash"></i>

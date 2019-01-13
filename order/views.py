@@ -7,6 +7,7 @@ from meal.models import Meal
 from order.models import Order, Transaction, OrderMeal
 from order.extras import generate_order_id, transact, generate_client_token
 from customer.models import Customer
+from meal.forms import MealForm
 
 import datetime
 import stripe
@@ -27,6 +28,15 @@ def add_to_cart(request, **kwargs):
     customer = get_object_or_404(Customer, user=request.user)
     meal = Meal.objects.filter(id=kwargs.get('item_id', "")).first()
     order_meal = OrderMeal.objects.create(meal=meal)
+
+    if request.method == 'POST':
+        form = MealForm(request.POST)
+
+        if form.is_valid():
+            order_meal.quantity = form.quantity
+    else:
+        form = MealForm()
+
     order_meal.save()
     customer_order, status = Order.objects.get_or_create(owner=customer, is_ordered=False)
     customer_order.meals.add(order_meal)
@@ -36,7 +46,7 @@ def add_to_cart(request, **kwargs):
 
     customer.orders.add(customer_order)
     messages.info(request, "Meal added to cart")
-    return redirect(reverse('meal:meals-list'))
+    return redirect(reverse('meal:meals-list'), {'form': form})
 
 
 @login_required
@@ -96,18 +106,13 @@ def checkout(request, **kwargs):
 @login_required
 def update_transaction_records(request, token):
     order_to_purchase = get_customer_pending_order(request)
+    customer_profile = get_object_or_404(Customer, user=request.user)
 
     order_to_purchase.is_ordered = True
+
     order_to_purchase.order_date = datetime.datetime.now()
     order_to_purchase.save()
 
-    order_meals = order_to_purchase.meals.all()
-
-    order_meals.update(date_ordered=datetime.datetime.now())
-
-    customer_profile = get_object_or_404(Customer, user=request.user)
-    #order_products = [item for item in order_meals]
-    #customer_profile.orders.add(*order_products)
     customer_profile.orders.add(order_to_purchase)
 
     customer_profile.save()

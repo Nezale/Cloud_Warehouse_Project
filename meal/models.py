@@ -18,5 +18,8 @@ class Meal(models.Model):
     quantity = models.IntegerField()
     description = models.FileField(null=True, blank=True)
 
+    def decrease_meal_quantity(self):
+        self.quantity -= 1
+
     def __str__(self):
         return self.name
