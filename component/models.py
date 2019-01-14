@@ -14,5 +14,8 @@ class Component(models.Model):
     )
     component_type = models.CharField(max_length=10, choices=TYPE_OF_COMPONENT)
 
+    def decrease_component_amount(self):
+        self.amount -= 1
+
     def __str__(self):
         return self.name
