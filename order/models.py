@@ -38,7 +38,7 @@ class Order(models.Model):
         return self.meals.all()
 
     def get_cart_total(self):
-        return sum([meal.meal.price*meal.quantity for meal in self.meals.all()])
+        return sum([meal.meal.price for meal in self.meals.all()])
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_date)

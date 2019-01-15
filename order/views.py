@@ -37,9 +37,14 @@ def add_to_cart(request, **kwargs):
     else:
         form = MealForm()
 
+    order_meal.meal.quantity -= 1
+    meal.save()
     order_meal.save()
+
+
     customer_order, status = Order.objects.get_or_create(owner=customer, is_ordered=False)
     customer_order.meals.add(order_meal)
+
     if status:
         customer_order.ref_code = generate_order_id()
         customer_order.save()
