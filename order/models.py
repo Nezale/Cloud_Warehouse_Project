@@ -14,6 +14,22 @@ class OrderMeal(models.Model):
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
+    def decrease_component_and_order_quantity(self):
+        component_list = self.meal.components.all()
+        self.meal.decrease_meal_quantity()
+        self.meal.save()
+        for Component in component_list:
+            Component.decrease_component_amount()
+            Component.save()
+
+    def increase_component_and_order_quantity(self):
+        component_list = self.meal.components.all()
+        self.meal.increase_meal_quantity()
+        self.meal.save()
+        for Component in component_list:
+            Component.increase_component_amount()
+            Component.save()
+
     def __str__(self):
         return self.meal.name
 
@@ -26,13 +42,6 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
     shipping_method = models.ForeignKey(ShippingMethod, null=True, on_delete=models.SET_NULL)
     payment = models.OneToOneField(Payment, on_delete=models.PROTECT, null=True)
-
-    def decrease_component_and_order_quantity(self, meal, component):
-        orderOrdered.send(sender=self.__class__, meal=meal, component=component)
-        for OrderMeal in self.meals:
-            OrderMeal.meal.decrease_meal_quantity()
-            for Component in self.meals.meal.components:
-                Component.decrease_component_amount()
 
     def get_cart_products(self):
         return self.meals.all()

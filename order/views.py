@@ -37,8 +37,7 @@ def add_to_cart(request, **kwargs):
     else:
         form = MealForm()
 
-    order_meal.meal.quantity -= 1
-    meal.save()
+    order_meal.decrease_component_and_order_quantity()
     order_meal.save()
 
 
@@ -57,8 +56,7 @@ def add_to_cart(request, **kwargs):
 @login_required
 def delete_from_cart(request, item_id):
     meal_to_delete = OrderMeal.objects.filter(pk=item_id).first()
-    meal_to_delete.meal.quantity += 1
-    meal_to_delete.meal.save()
+    meal_to_delete.increase_component_and_order_quantity()
 
     if meal_to_delete:
         meal_to_delete.delete()

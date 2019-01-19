@@ -21,5 +21,8 @@ class Meal(models.Model):
     def decrease_meal_quantity(self):
         self.quantity -= 1
 
+    def increase_meal_quantity(self):
+        self.quantity += 1
+
     def __str__(self):
         return self.name

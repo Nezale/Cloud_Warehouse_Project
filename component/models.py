@@ -17,5 +17,8 @@ class Component(models.Model):
     def decrease_component_amount(self):
         self.amount -= 1
 
+    def increase_component_amount(self):
+        self.amount += 1
+
     def __str__(self):
         return self.name
