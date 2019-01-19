@@ -1,45 +1,38 @@
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.db import transaction
+from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.http import HttpResponse
-from .models import Customer
-from order.models import Order
 
-from customer.forms import UserForm, CustomerForm
+# Create your views here.
 
+def main_login(request):
+    form = AuthenticationForm()
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the customer index.")
-
-
-@login_required
-@transaction.atomic
-def update_customer(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        customer_form = CustomerForm(request.POST, instance=request.user.customer)
-        if user_form.is_valid() and customer_form.is_valid():
-            user_form.save()
-            customer_form.save()
-            messages.success(request, 'Your profile was successfully updated')
-            return redirect('settings:profile')
-        else:
-            messages.error(request, 'Please correct the error below')
+        if 'LogInForm' in request.POST:
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                user = User.objects.get(id=user.id)
+                if user.groups.filter(name='pracownik').exists():
+                    return render(request, 'pracownik.html', {'form': form})
+                return render(request, 'indexLogin.html', {'form': form})
+            else:
+                return render(request, 'indexLogin.html', {'form': form})
+        elif 'LogOutForm' in request.POST:
+            logout(request)
+            form = AuthenticationForm()
+            return render(request, 'indexLogin.html', {'form': form})
+
     else:
-        user_form = UserForm(request.POST, instance=request.user)
-        customer_form = CustomerForm(request.POST, instance=request.user.customer)
-    return render(request,'profiles/profile.html', {
-        'user_form': user_form,
-        'customer_form': customer_form
-    })
-
-
-def my_profile(request):
-    my_customer_profile = Customer.objects.filter(user=request.user).first()
-    my_orders = Order.objects.all()
-    context = {
-        'my_orders': my_orders
-    }
-
-    return render(request, "profile.html", context)
+        user = request.user.is_authenticated
+        if user:
+            form = AuthenticationForm(data=request.POST)
+            return render(request, 'indexLogin.html', {'form': form})
+        else:
+            form = AuthenticationForm()
+            return render(request, 'indexLogin.html', {'form': form})
