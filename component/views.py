@@ -12,7 +12,7 @@ from component.forms import ComponentForm
 def index(request):
     components = Component.objects.order_by('-name').all()
     context = {'components': components, }
-    return HttpResponse(render(request, 'index.html', context))
+    return HttpResponse(render(request, 'indexComponent.html', context))
 
 
 @login_required
