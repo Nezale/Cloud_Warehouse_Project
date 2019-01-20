@@ -1,0 +1,14 @@
+runtime: python37
+entrypoint: gunicorn -b :$PORT warehouse.wsgi # specific to a GUnicorn HTTP server deployment
+
+runtime_config:
+  python_version: 3
+  
+handlers:
+
+- url: /static
+  static_dir: static/
+
+- url: /.*
+  script: auto
+# [END django_app]

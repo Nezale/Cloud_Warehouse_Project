@@ -1,5 +1,9 @@
 from django import forms
+from .models import Meal
 
 
-class MealForm(forms.Form):
-    quantity = forms.IntegerField(label="Quantity")
+class MealForm(forms.ModelForm):
+    class Meta:
+        model = Meal
+        fields = ['components', 'name', 'price', 'meal_type', 'quantity', 'description']
+

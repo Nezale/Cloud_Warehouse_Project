@@ -37,9 +37,12 @@ def add_to_cart(request, **kwargs):
     else:
         form = MealForm()
 
-    order_meal.decrease_component_and_order_quantity()
-    order_meal.save()
-
+    if meal.quantity !=0:
+        order_meal.decrease_component_and_order_quantity()
+        order_meal.save()
+    else:
+        messages.info(request, "Meal is out of stock !")
+        return redirect(reverse('order:order_summary'), {'form': form})
 
     customer_order, status = Order.objects.get_or_create(owner=customer, is_ordered=False)
     customer_order.meals.add(order_meal)
@@ -50,7 +53,7 @@ def add_to_cart(request, **kwargs):
 
     customer.orders.add(customer_order)
     messages.info(request, "Meal added to cart")
-    return redirect(reverse('meal:meals-list'), {'form': form})
+    return redirect(reverse('order:order_summary'), {'form': form})
 
 
 @login_required

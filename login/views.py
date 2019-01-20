@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.http import HttpResponse
 
+
 # Create your views here.
 
 def main_login(request):
@@ -18,8 +19,8 @@ def main_login(request):
                 user = form.get_user()
                 login(request, user)
                 user = User.objects.get(id=user.id)
-                if user.groups.filter(name='pracownik').exists():
-                    return render(request, 'pracownik.html', {'form': form})
+                if request.user.groups.filter(name='pracownik').exists():
+                        return render(request, 'pracownik.html', {'form': form})
                 return render(request, 'indexLogin.html', {'form': form})
             else:
                 return render(request, 'indexLogin.html', {'form': form})

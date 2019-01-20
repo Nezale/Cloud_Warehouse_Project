@@ -14,20 +14,20 @@ class OrderMeal(models.Model):
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
-    def decrease_component_and_order_quantity(self):
-        component_list = self.meal.components.all()
-        self.meal.decrease_meal_quantity()
-        self.meal.save()
-        for Component in component_list:
-            Component.decrease_component_amount()
-            Component.save()
-
     def increase_component_and_order_quantity(self):
         component_list = self.meal.components.all()
         self.meal.increase_meal_quantity()
         self.meal.save()
         for Component in component_list:
             Component.increase_component_amount()
+            Component.save()
+            
+    def decrease_component_and_order_quantity(self):
+        component_list = self.meal.components.all()
+        self.meal.decrease_meal_quantity()
+        self.meal.save()
+        for Component in component_list:
+            Component.decrease_component_amount()
             Component.save()
 
     def __str__(self):

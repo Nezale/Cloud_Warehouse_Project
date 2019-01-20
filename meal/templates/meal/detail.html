@@ -1,3 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <title>login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/login/">
+        <span style="font-size: 20px;">
+        <i class="fas fa-warehouse"></i>
+        </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/login/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/meal/">Menu<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="">History<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active">
+                <a class="nav-link" href="/order/order-summary/">Cart<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+
 <h2>Posiłek: {{ meal.name }}</h2>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -9,16 +57,23 @@
     </ul>
 {% endfor %}
 <h2>Cena: {{ meal.price }}</h2>
+<h2>Quantity: {{ meal.quantity }}</h2>
 <h2>Rodzaj posiłku: {{ meal.meal_type }}</h2>
-<a href="{% url 'order:order_summary'  %}" class="btn btn warning">
-    Go to cart
-</a>
+             <img height="250" width="250"
+             src='https://storage.googleapis.com/solwit-pjatk-arc-2018-gr2.appspot.com/{{ meal.description}}'
+             alt="{{ meal.description}}"/>
 
 <form action="{% url 'order:add_to_cart' meal.id %}" method="post">
     {% csrf_token %}
     {{ form }}
 </form>
 
-<a href="{% url 'order:add_to_cart' meal.id %}" class="btn btn warning">
+<a href="{% url 'order:add_to_cart' meal.id %}" class="btn btn-primary">
     Add to cart
 </a>
+
+<a href="{% url 'order:order_summary'  %}" class="btn btn-success">
+    Go to cart
+</a>
+
+</html>

@@ -11,7 +11,7 @@
       </tr>
       {% for order in my_orders %}
         <tr>
-          <td>{{ order.date_ordered }}</td>
+          <td>{{ order.order_date }}</td>
           <td>{{ order.ref_code }}</td>
           <td>
         	{% for item in order.meals.all %}

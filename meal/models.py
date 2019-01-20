@@ -23,6 +23,6 @@ class Meal(models.Model):
 
     def increase_meal_quantity(self):
         self.quantity += 1
-
+        
     def __str__(self):
         return self.name

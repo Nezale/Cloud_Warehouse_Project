@@ -25,7 +25,7 @@ SECRET_KEY = 'i2^upece6)kfuc4mcm9m*md#ji24eyxl-h56-p!@dge@ib4bdi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,15 +83,34 @@ WSGI_APPLICATION = 'warehouse.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+import pymysql  # noqa: 402
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+pymysql.install_as_MySQLdb()
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/solwit-pjatk-arc-2018-gr2:europe-west1:booktask1',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'NAME': 'wareh',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect to
+    # Cloud SQL via the proxy. To start the proxy via command line:
+    #
+    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    #
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+# [END db_setup]
 
-
+    
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -129,7 +148,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 LOGIN_REDIRECT_URL = '/meal'
 STATIC_URL = '/static/'
-
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'solwit-pjatk-arc-2018-gr2.appspot.com'
+STATIC_ROOT = 'static'
 # Braintree configuration
 BRAINTREE_ENVIRONMENT= 'sandbox'
 BRAINTREE_MERCHANT_ID = '5hy33f73yvhjp7cj'
