@@ -1,0 +1,12 @@
+{% if components %}
+    <a href="{% url 'add-component' %}" class="btn btn warning">
+         dodaj składnik
+    </a>
+    <ul>
+        {%  for component in components %}
+            <li><a href="{% url 'component-details' component.id %}">{{ component.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available</p>
+{% endif %}
