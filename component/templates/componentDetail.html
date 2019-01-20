@@ -1,0 +1,13 @@
+<h2>Składnik: {{ component.name }}</h2>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<h2>Cena: {{ component.price_per_dish }}</h2>
+<h2>Rodzaj składnika: {{ component.component_type }}</h2>
+<a href="{% url 'delete-component' component.id %}" class="btn btn warning">
+   Usuń składnik
+</a>
+
+<a href="{% url 'update-component' component.id%}" class="btn btn warning">
+    Zmien składnik
+</a>
