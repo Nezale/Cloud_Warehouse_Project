@@ -1,0 +1,4 @@
+cron:
+- description: "count all products in warehouse"
+  url: /login/raport
+  schedule: every 10 minutes
