@@ -18,7 +18,7 @@
 
 
 {% if user.is_authenticated %}
-
+    {% csrf_token %}
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,14 +39,17 @@
                 <h1 class="display-4">Cześć {{ user.username }}</h1>
                 <p class="lead">Panel zarządzania magazynem
                 <a href="../meal">Sprawdz liste produktów</a>
+                Aktualna liczba produktów: {{ mealQuantity }}
+                 <form class="form-signin" action="/login/raport" method="post">
+                    {% csrf_token %}
+        <input type="submit" value="Count" name="count">
+    </form>
             </div>
         </div>
     </div>
     <div class="col-12">
-        <form class="logout-link" action="" method="post">
-
+        <form class="logout-link" action="/login/logout" method="post">
             {% csrf_token %}
-
             <div class="text-center">
                 <button type="submit" name="LogOutForm" class="btn btn-danger">Logout</button>
             </div>
