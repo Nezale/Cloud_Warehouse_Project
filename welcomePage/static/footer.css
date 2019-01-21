@@ -1,0 +1,49 @@
+html{
+    height:100%;
+}
+
+body {
+    background-color: #5e91f2;
+    min-height:100%;
+    padding-bottom: 160px;
+    position: relative;
+}
+
+footer{
+    background: rgba(9, 9, 18, 0.8);
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+footer .menu li a{
+	color:#b1aca1;
+    padding: 10px;
+    text-decoration:none;
+}
+
+footer .menu li a:hover{
+	color: #dbd9d6;
+}
+footer .fa-facebook-square ,
+footer .fa-google-plus-square ,
+footer .fa-instagram ,
+footer .fa-twitter-square {
+	color:#b1aca1;
+	font-size:20px;
+	padding:10px;
+}
+
+footer .fa-facebook-square:hover,
+footer .fa-instagram:hover,
+footer .fa-twitter-square:hover,
+footer .fa-google-plus-square:hover {
+	color: #ffffff;
+}
+
+.jumbotron{
+    background: #5a9fe2;
+}

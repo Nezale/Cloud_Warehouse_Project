@@ -13,6 +13,7 @@
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
     <title>login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -33,9 +34,6 @@
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/meal/">Menu<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="">History<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -75,5 +73,38 @@
 <a href="{% url 'order:order_summary'  %}" class="btn btn-success">
     Go to cart
 </a>
+
+<div class="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
+                        <ul class="list-inline text-center">
+                        <li class="list-inline-item"><a href=""><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-twitter-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-google-plus-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <ul class="menu list-inline custom-center">
+                        <li class="list-inline-item">
+                            <a href="/">Home</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p class="custom-center" style="color: white; margin-top: 10px">&copy Daniel Belter, Jędrzej Babło, Aleksander Kozyra 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</div>
 
 </html>
