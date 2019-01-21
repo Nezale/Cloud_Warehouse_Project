@@ -12,29 +12,41 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
     <title>login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
-
 {% if user.is_authenticated %}
 
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../login">Home<span class="sr-only">(current)</span></a>
-                </li>
-                    <li class="nav-item active">
-                    <a class="nav-link" href="../login/">Dodaj Skladnik<span class="sr-only">(current)</span></a>
-                </li>
-
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/login/">
+        <span style="font-size: 20px;">
+        <i class="fas fa-warehouse"></i>
+        </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/login/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/meal/">Menu<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/customer/profile/">History<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item active">
+                <a class="nav-link" href="/order/order-summary/">Cart<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
     </nav>
 
 
@@ -45,33 +57,23 @@
 		        {% csrf_token %}
 		        <h1>{{ form.errors }}</h1>
 				<div class="form-group">
-                    <label for="name" class="h2 ">Nazwa:</label><h3>{{ form.name }}</h3>
+                    <label for="name" class="h2 ">Name:</label><h3>{{ form.name }}</h3>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="h2 ">Liczba:</label><h3>{{ form.amount }}</h3>
+                    <label for="name" class="h2 ">Quantity:</label><h3>{{ form.amount }}</h3>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="h2 ">price_per_dish:</label><h3>{{ form.price_per_dish }}</h3>
+                    <label for="name" class="h2 ">Price per dish:</label><h3>{{ form.price_per_dish }}</h3>
                 </div>
                   <div class="form-group">
-                    <label for="name" class="h2 ">Typ:</label><h3>{{ form.component_type }}</h3>
+                    <label for="name" class="h2 ">Type:</label><h3>{{ form.component_type }}</h3>
                 </div>
 		        <input type="submit" value="Submit" name="authorForm">
     		</form>
 		</div>
     </div>
 </div>
-    <div class="col-12">
-        <form class="logout-link" action="" method="post">
 
-            {% csrf_token %}
-
-            <div class="text-center">
-                <button type="submit" name="LogOutForm" class="btn btn-danger">Logout</button>
-            </div>
-
-        </form>
-    </div>
 {% else %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -96,6 +98,39 @@
 
 
 {% endif %}
+
+<div class="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
+                        <ul class="list-inline text-center">
+                        <li class="list-inline-item"><a href=""><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-twitter-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-google-plus-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <ul class="menu list-inline custom-center">
+                        <li class="list-inline-item">
+                            <a href="/">Home</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p class="custom-center" style="color: white; margin-top: 10px">&copy Daniel Belter, Jędrzej Babło, Aleksander Kozyra 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
