@@ -7,7 +7,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, help_text='Required.')
     last_name = forms.CharField(max_length=30, help_text='Required.')
     email = forms.EmailField(max_length=100, help_text='Required.')
-    phone_number = forms.CharField(max_length=12, help_text='Required.')
+    phone_number = forms.DecimalField(max_digits=12, help_text='Required.')
     city = forms.CharField(max_length=100, help_text='Required.')
     zip_code = forms.CharField(max_length=100, help_text='Required.')
     state = forms.CharField(max_length=100, help_text='Required.')

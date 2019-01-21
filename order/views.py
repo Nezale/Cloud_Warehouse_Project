@@ -140,4 +140,3 @@ def update_transaction_records(request, token):
 @login_required
 def success(request, **kwargs):
     return render(request, 'order/purchase_success.html', {})
-

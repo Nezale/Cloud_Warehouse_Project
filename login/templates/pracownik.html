@@ -40,6 +40,7 @@
                 <p class="lead">Panel zarządzania magazynem
                 <a href="../meal">Sprawdz liste produktów</a>
                 Aktualna liczba produktów: {{ mealQuantity }}
+
                  <form class="form-signin" action="/login/raport" method="post">
                     {% csrf_token %}
         <input type="submit" value="Count" name="count">

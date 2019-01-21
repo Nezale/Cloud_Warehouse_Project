@@ -1,10 +1,10 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator
 
 class Component(models.Model):
     name = models.CharField(max_length=50)
-    amount = models.SmallIntegerField()
-    price_per_dish = models.SmallIntegerField()
+    amount = models.SmallIntegerField(validators=[MinValueValidator(1)])
+    price_per_dish = models.SmallIntegerField(validators=[MinValueValidator(1)])
     TYPE_OF_COMPONENT = (
         ('MEAT', 'MEAT'),
         ('CHEESE', 'CHEESE'),

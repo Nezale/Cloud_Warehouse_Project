@@ -29,7 +29,7 @@ def update_customer(request):
     else:
         user_form = UserForm(request.POST, instance=request.user)
         customer_form = CustomerForm(request.POST, instance=request.user.customer)
-    return render(request,'profiles/profile.html', {
+    return render(request, 'profiles/profile.html', {
         'user_form': user_form,
         'customer_form': customer_form
     })
@@ -43,3 +43,15 @@ def my_profile(request):
     }
 
     return render(request, "profile.html", context)
+
+
+#def get_all_orders(request):
+    #customers = Order.objects.all()
+    #if request.method == 'POST':
+     #   order = Order.objects.get(id=int(request.POST.get('orderId', False)))
+     #   order.delete(order)
+
+    #ctx = {
+     #   'customer_order': customers
+    #}
+    #return render(request, "orders.html", ctx)

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-hover table-bordered text-center">
+      {% for order in customer_order %}
+        <tr>
+          <td>{{ order.owner.address.city }}</td>
+          <td>{{ order.owner.address.state }}</td>
+          <td>{{ order.owner.address.street }}</td>
+          <td>{{ order.owner.address.zip_code}}</td>
+
+              <td>{{ order.owner.phone_number }}</td>
+              <td>{{ order.owner.user}}</td>
+
+      {% endfor %}
+    </table>
+
+{% endblock content %}
