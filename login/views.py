@@ -45,7 +45,9 @@ def main_login(request):
 
 
 def count_quantity(request):
-    Raport.meal_quantity = Meal.objects.get().quantity
+    Raport.meal_quantity = 0
+    for meal in Meal.objects.all():
+        Raport.meal_quantity += meal.quantity
     return redirect('/login')
 
 
