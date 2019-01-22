@@ -4,6 +4,8 @@
 <br>
 <table class="table table-hover table-bordered text-center">
       <tr class="text-center">
+          <th>Delivery address</th>
+          <th>Contact</th>
         <th>Date Ordered</th>
         <th>Reference Code</th>
         <th>Meals</th>
@@ -11,6 +13,8 @@
       </tr>
       {% for order in my_orders %}
         <tr>
+            <td>{{ order.owner.address.city }} {{ order.owner.address.state }} {{ order.owner.address.street }}</td>
+          <td>{{ order.owner.user.first_name }} {{ order.owner.user.last_name}} {{ order.owner.phone_number }}</td>
           <td>{{ order.order_date }}</td>
           <td>{{ order.ref_code }}</td>
           <td>
