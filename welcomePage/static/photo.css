@@ -1,6 +1,6 @@
 @import url(../static/ware.jpg);
 body{
-    background-color: #5e91f2;
+    background-color: rgba(94, 94, 168, 0.91);
 }
 .centered {
     position: absolute;
