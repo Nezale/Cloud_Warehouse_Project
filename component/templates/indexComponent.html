@@ -55,7 +55,8 @@
     </a>
     <ul>
         {%  for component in components %}
-            <li><a href="{% url 'component-details' component.id %}">{{ component.name }}</a></li>
+            <br>
+            <li><a href="{% url 'component-details' component.id %}"><button type="submit" class="btn btn-dark">{{ component.name }}</button></a></li>
         {% endfor %}
     </ul>
 {% else %}

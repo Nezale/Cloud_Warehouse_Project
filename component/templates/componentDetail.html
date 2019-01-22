@@ -46,18 +46,18 @@
     </div>
     </nav>
 <br>
-<h2>Component: {{ component.name }}</h2>
+<h2><span style="padding-left: 10px"> Component: {{ component.name }}</span></h2>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<h2>Price: {{ component.price_per_dish }}</h2>
-<h2>Type of component: {{ component.component_type }}</h2>
-<a href="{% url 'delete-component' component.id %}" class="btn btn warning">
-   Delete the component
+<h2><span style="padding-left: 10px">Price: {{ component.price_per_dish }}</span></h2>
+<h2><span style="padding-left: 10px">Type of component: {{ component.component_type }}</span></h2>
+<a href="{% url 'delete-component' component.id %}"><span style="padding-left: 10px"><button  class="btn btn-danger">
+    Delete the component</button></span>
 </a>
 
-<a href="{% url 'update-component' component.id%}" class="btn btn warning">
-    Change the component
+<a href="{% url 'update-component' component.id%}"><button class="btn btn-warning">
+    Change the component</button>
 </a>
 
 <div class="footer">

@@ -46,20 +46,20 @@
         </ul>
     </div>
     </nav>
-
-<h2>Posiłek: {{ meal.name }}</h2>
+<br>
+<h5><span style="padding-left: 10px">Name: {{ meal.name }}</span></h5>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<h2>Składniki: </h2>
+<h5><span style="padding-left: 10px">Components: </span></h5>
 {% for component in meal.components.all %}
     <ul>
         <li>{{ component.name }}</li>
     </ul>
 {% endfor %}
-<h2>Cena: {{ meal.price }}</h2>
-<h2>Quantity: {{ meal.quantity }}</h2>
-<h2>Rodzaj posiłku: {{ meal.meal_type }}</h2>
+<h5><span style="padding-left: 10px">Price: {{ meal.price }}</span></h5>
+<h5><span style="padding-left: 10px">Quantity: {{ meal.quantity }}</span></h5>
+<h5><span style="padding-left: 10px">Type: {{ meal.meal_type }}</span></h5>
              <img height="250" width="250"
              src='https://storage.googleapis.com/solwit-pjatk-arc-2018-gr2.appspot.com/{{ meal.description}}'
              alt="{{ meal.description}}"/>
@@ -68,11 +68,9 @@
     {% csrf_token %}
     {{ form }}
 </form>
-
-<a href="{% url 'order:add_to_cart' meal.id %}" class="btn btn-primary">
+<span style="padding-left: 10px"><a href="{% url 'order:add_to_cart' meal.id %}" class="btn btn-primary">
     Add to cart
-</a>
-
+</a></span>
 <a href="{% url 'order:order_summary'  %}" class="btn btn-success">
     Go to cart
 </a>
@@ -95,7 +93,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
                     <ul class="menu list-inline custom-center">
                         <li class="list-inline-item">
-                            <a href="/">Home</a>
+                            <a href="/login/">Home</a>
                         </li>
                     </ul>
                     </div>

@@ -62,33 +62,38 @@
         <div class="text-center">
             <div class="jumbotron">
                 <h1 class="display-4">Hello {{ user.username }}</h1>
-                <p class="lead">Warehouse management panel
-                <a href="../meal">Check the product list</a>
-                Current number of products: {{ mealQuantity }}
-
-                 <form class="form-signin" action="/login/raport" method="post">
-                    {% csrf_token %}
-        <input type="submit" value="Count" name="count">
-    </form>
             </div>
         </div>
     </div>
 
+<div class="col-12">
+    <div class="text-center">
+    <h3>Warehouse Management Panel</h3>
+        <p class="lead">Current number of products: {{ mealQuantity }}</p>
+            <form class="form-signin" action="/login/raport" method="post">
+                {% csrf_token %}
+                <button class="btn btn-dark">Count</button>
+            </form>
+        <br>
+        <a href="/meal"><button class="btn btn-dark">Check the product list</button></a>
+     </div>
+</div>
+    <br>
     <div class="col-12">
        <div class="text-center">
-          <a href="/component/"> <button type="submit" class="btn btn-primary">Components</button></a>
+          <a href="/component/"> <button type="submit" class="btn btn-dark">Components</button></a>
        </div>
     </div>
     <br>
    <div class="col-12">
        <div class="text-center">
-          <a href="/component/add/"> <button type="submit" class="btn btn-primary">Add component</button></a>
+          <a href="/component/add/"> <button type="submit" class="btn btn-dark">Add component</button></a>
        </div>
     </div>
     <br>
     <div class="col-12">
        <div class="text-center">
-          <a href="/meal/add/"> <button type="submit" class="btn btn-primary">Add meal</button></a>
+          <a href="/meal/add/"> <button type="submit" class="btn btn-dark">Add meal</button></a>
        </div>
     </div>
 
@@ -111,7 +116,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
                     <ul class="menu list-inline custom-center">
                         <li class="list-inline-item">
-                            <a href="/">Home</a>
+                            <a href="/login/">Home</a>
                         </li>
                     </ul>
                     </div>

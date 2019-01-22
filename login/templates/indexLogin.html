@@ -62,11 +62,45 @@
         <div class="text-center">
             <div class="jumbotron">
                 <h1 class="display-4">Hello {{ user.username }}</h1>
-                <p class="lead">Welcome to our storehouse page,
-                <a href="/meal">check the product list</a>
+                <p class="lead">Welcome to our storehouse page.
+                    <br><br>
+                    <a href="/meal"><button class="btn btn-dark">Check the product list</button></a>
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-1 mt-sm-1">
+                        <ul class="list-inline text-center">
+                        <li class="list-inline-item"><a href=""><i class="fab fa-facebook-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-twitter-square"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href=""><i class="fab fa-google-plus-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <ul class="menu list-inline custom-center">
+                        <li class="list-inline-item">
+                            <a href="/login/">Home</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <p class="custom-center" style="color: white; margin-top: 10px">&copy Daniel Belter, Jędrzej Babło, Aleksander Kozyra 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</div>
 
 {% else %}
 
@@ -117,13 +151,7 @@
 
         <input type="submit" value="Login" name="LogInForm">
     </form>
-
     </body>
-
-
-{% endif %}
-
-<br>
 
 <div class="footer">
         <footer>
@@ -157,6 +185,9 @@
             </div>
         </footer>
 </div>
+
+{% endif %}
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
