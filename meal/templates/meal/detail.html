@@ -74,6 +74,13 @@
 <a href="{% url 'order:order_summary'  %}" class="btn btn-success">
     Go to cart
 </a>
+<a href="{% url 'meal:delete-meal' meal.id %}"><span style="padding-left: 10px"><button  class="btn btn-danger">
+    Delete the meal</button></span>
+</a>
+
+<a href="{% url 'meal:update-meal' meal.id%}"><button class="btn btn-warning">
+    Change the meal</button>
+</a>
 
 <div class="footer">
         <footer>

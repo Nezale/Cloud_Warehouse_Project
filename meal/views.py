@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.http import HttpResponse
 from .models import Meal
@@ -27,12 +28,43 @@ def detail(request, id):
         'meal_fields': meal._meta.get_fields()
     })
 
+@login_required
+def update_meal(request, id):
+    meal = get_object_or_404(Meal, pk=id)
+    formMeal = MealForm()
+    formComponent = ComponentForm()
 
-def results(request, id):
-    response = "You are looking at the result of meal %s"
-    return HttpResponse(response % id)
+
+    if request.method == 'POST':
+        if 'authorFormButton' in request.POST:
+            form = ComponentForm(request.POST)
+            if form.is_valid():
+                component = form.save()
+                return render(request, 'meal/updateMeal.html', {'formComponent': formComponent, 'formMeal': formMeal})
+            else:
+                return render(request, 'meal/updateMeal.html', {'formComponent': form, 'formMeal': formMeal})
+        elif 'mealButton' in request.POST:
+            form = MealForm(request.POST, request.FILES, instance=meal)
+            if form.is_valid():
+                meal = form.save()
+                testurl = meal.description
+                return render(request, 'meal/updateMeal.html',
+                              {'formComponent': formComponent, 'formMeal': formMeal, 'testurl': testurl})
+            else:
+                return render(request, 'meal/updateMeal.html', {'formComponent': form, 'formComponent': formComponent})
+    else:
+        return render(request, 'meal/updateMeal.html', {'formComponent': formComponent, 'formMeal': formMeal})
 
 
+@login_required
+def delete_meal(request, id):
+    meal = get_object_or_404(Meal, pk=id)
+    meal.delete()
+    messages.info(request, "Meal has been deleted")
+    return redirect('/meal/')
+
+
+@login_required
 def addMeal(request):
     formComponent = ComponentForm()
     formMeal = MealForm()
@@ -45,7 +77,7 @@ def addMeal(request):
                 return render(request, 'meal/pracAddMeal.html', {'formComponent': formComponent, 'formMeal': formMeal})
             else:
                 return render(request, 'meal/pracAddMeal.html', {'formComponent': form, 'formMeal': formMeal})
-        elif 'bookFormButton' in request.POST:
+        elif 'mealButton' in request.POST:
             form = MealForm(request.POST, request.FILES)
             if form.is_valid():
                 meal = form.save()
