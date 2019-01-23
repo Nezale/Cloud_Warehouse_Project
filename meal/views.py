@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.http import HttpResponse
 from .models import Meal
-
+from .decorators import group_required
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.http import HttpResponse
@@ -23,12 +23,18 @@ def index(request):
 
 def detail(request, id):
     meal = get_object_or_404(Meal, pk=id)
-    return render(request, 'meal/detail.html', {
-        'meal': meal,
-        'meal_fields': meal._meta.get_fields()
-    })
+    if request.user.groups.filter(name='pracownik').exists():
+        return render(request, 'meal/detail.html', {
+            'meal': meal,
+            'meal_fields': meal._meta.get_fields()
+        })
+    else:
+        return render(request, 'meal/detailMealUser.html', {
+            'meal': meal,
+            'meal_fields': meal._meta.get_fields()
+        })
 
-@login_required
+@group_required('pracownik')
 def update_meal(request, id):
     meal = get_object_or_404(Meal, pk=id)
     formMeal = MealForm()
@@ -56,7 +62,7 @@ def update_meal(request, id):
         return render(request, 'meal/updateMeal.html', {'formComponent': formComponent, 'formMeal': formMeal})
 
 
-@login_required
+@group_required('pracownik')
 def delete_meal(request, id):
     meal = get_object_or_404(Meal, pk=id)
     meal.delete()
@@ -64,7 +70,7 @@ def delete_meal(request, id):
     return redirect('/meal/')
 
 
-@login_required
+@group_required('pracownik')
 def addMeal(request):
     formComponent = ComponentForm()
     formMeal = MealForm()
