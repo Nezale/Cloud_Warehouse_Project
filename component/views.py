@@ -2,20 +2,21 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from meal.decorators import group_required
 from django.urls import reverse
 
 from .models import Component
 from component.forms import ComponentForm
 
 
-@login_required
+@group_required('pracownik')
 def index(request):
     components = Component.objects.order_by('-name').all()
     context = {'components': components, }
     return HttpResponse(render(request, 'indexComponent.html', context))
 
 
-@login_required
+@group_required('pracownik')
 def details(request, id):
     component = get_object_or_404(Component, pk=id)
     context = {'component': component,
@@ -23,7 +24,7 @@ def details(request, id):
     return render(request, 'componentDetail.html', context)
 
 
-@login_required
+@group_required('pracownik')
 def update_component(request, id):
     component = get_object_or_404(Component, pk=id)
     form = ComponentForm()
@@ -39,7 +40,7 @@ def update_component(request, id):
         return render(request, 'updateComponent.html', {'form': form})
 
 
-@login_required
+@group_required('pracownik')
 def delete_component(request, id):
     component = get_object_or_404(Component, pk=id)
     component.delete()
@@ -47,7 +48,7 @@ def delete_component(request, id):
     return redirect('/component/')
 
 
-@login_required
+@group_required('pracownik')
 def add_component(request):
     form = ComponentForm()
     if request.method == 'POST':
