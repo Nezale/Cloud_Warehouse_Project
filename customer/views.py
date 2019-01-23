@@ -37,7 +37,7 @@ def update_customer(request):
 
 def my_profile(request):
     my_customer_profile = Customer.objects.filter(user=request.user).first()
-    my_orders = Order.objects.all()
+    my_orders = my_customer_profile.orders.all()
     context = {
         'my_orders': my_orders
     }
@@ -45,13 +45,9 @@ def my_profile(request):
     return render(request, "profile.html", context)
 
 
-#def get_all_orders(request):
-    #customers = Order.objects.all()
-    #if request.method == 'POST':
-     #   order = Order.objects.get(id=int(request.POST.get('orderId', False)))
-     #   order.delete(order)
-
-    #ctx = {
-     #   'customer_order': customers
-    #}
-    #return render(request, "orders.html", ctx)
+def get_all_orders(request):
+    customer_order = Order.objects.all()
+    ctx = {
+        'customer_order': customer_order
+    }
+    return render(request, "orders.html", ctx)

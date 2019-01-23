@@ -3,17 +3,34 @@
 {% block content %}
 <br>
 <table class="table table-hover table-bordered text-center">
+      <tr class="text-center">
+          <th>Delivery address</th>
+          <th>Contact</th>
+        <th>Date Ordered</th>
+        <th>Reference Code</th>
+        <th>Meals</th>
+        <th>Price</th>
+      </tr>
       {% for order in customer_order %}
         <tr>
-          <td>{{ order.owner.address.city }}</td>
-          <td>{{ order.owner.address.state }}</td>
-          <td>{{ order.owner.address.street }}</td>
-          <td>{{ order.owner.address.zip_code}}</td>
+            <td>{{ order.owner.address.city }} {{ order.owner.address.state }} {{ order.owner.address.street }}</td>
+          <td>{{ order.owner.user.first_name }} {{ order.owner.user.last_name}} {{ order.owner.phone_number }}</td>
+          <td>{{ order.order_date }}</td>
+          <td>{{ order.ref_code }}</td>
+          <td>
+        	{% for item in order.meals.all %}
+        		{{ item }}
+      		{% endfor %}
+      	  </td>
+          <td>${{ order.get_cart_total }}</td>
 
-              <td>{{ order.owner.phone_number }}</td>
-              <td>{{ order.owner.user}}</td>
-
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan= 4> You have no orders.</td>
+        </tr>
       {% endfor %}
+
     </table>
 
 {% endblock content %}

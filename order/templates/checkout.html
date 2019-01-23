@@ -52,29 +52,7 @@
     </nav>
 <body>
     {% include 'messages.html' %}
-    <div class="container">
-    <section>
-      <div class="row" id="tablerow">
-      <div class="col-md-4 col-xs-12">
-        <div class="panel panel-primary">
-
-          <div class="panel-body">
-            <h5>Enter Voucher Code Below<br><small>If multiple, separate each with comma</small></h5>
-
-            <div>
-              <form action="." method="post">
-                {% csrf_token %}
-                <input type="text"  name="voucher_codes" class="form-control" id="voucher_code" required>
-                <input type="hidden"  name="order_id" value="{{ order.id }}">
-                <br>
-                <span>
-                  <input type="submit" class="btn btn-warning pull-right" value="Apply Voucher">
-                </span>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+    <br>
       <div class="col-md-8 col-xs-12">
         <table class="table">
           <tr>
@@ -85,11 +63,9 @@
               {% for item in order.get_cart_products %}
                 <tr>
                   <td>{{ item }}</td>
-                  <tdx>${{ item.meal.price }}</tdx>
+                  <td>${{ item.meal.price }}</td>
                 </tr>
               {% endfor %}
-            </td>
-          </tr>
           <tr>
             <td><strong>Order Total</strong> </td>
             <td> <strong>${{ order.get_cart_total }}</strong></td>
@@ -97,8 +73,6 @@
         </table>
         <button onclick="toggleDisplay();" class="btn btn-warning" style="width: 100%;">Checkout with a credit card</button>
       </div>
-     </div>
-    </section>
 
 
 <div id="collapseStripe" class="wrapper">
@@ -119,12 +93,7 @@
     </div>
     <button>Submit Payment</button>
   </form>
-
   </div>
-
-  <div id="stripe-token-handler" class="is-hidden">Success! Got token: <span class="token"></span></div>
-
-</div>
 
 <!-- script for the stripe form -->
 <script src="{% static 'js/checkout.js' %}"></script>
@@ -168,7 +137,7 @@
       }
     };
 </script>
-
+<br><br><br>
 <div class="footer">
         <footer>
             <div class="container">
@@ -201,6 +170,5 @@
             </div>
         </footer>
 </div>
-
 </body>
 </html>
