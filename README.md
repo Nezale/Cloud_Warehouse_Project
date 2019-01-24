@@ -6,7 +6,7 @@ Simple application which allow to order meals if you are a customer or managing 
 
 #### Run the app
 ```
-1. git clone https://source.developers.google.com/p/solwit-pjatk-arc-2018-gr2/r/booktask
+1. git clone https://github.com/Nezale/Cloud_Warehouse_Project.git
 ```
 ```
 2. cd booktask
