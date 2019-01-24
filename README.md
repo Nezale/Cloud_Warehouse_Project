@@ -39,6 +39,9 @@ Simple application which allow to order meals if you are a customer or managing 
 ```
 solwit-pjatk-arc-2018-gr2.appspot.com
 ```
+### Cards for testing
+4012000033330026	
+4012000077777777
 
 ### How to report bugs
 + Send email to s15715@pjwstk.edu.pl, with title: "Warehouse bugs"
