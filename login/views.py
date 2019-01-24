@@ -50,7 +50,12 @@ def count_quantity(request):
         Raport.meal_quantity += meal.quantity
     return redirect('/login')
 
-
+def count_quantity_task(request):
+    Raport.meal_quantity = 0
+    for meal in Meal.objects.all():
+        Raport.meal_quantity += meal.quantity
+    return HttpResponse('Counting complete')
+    
 def logout_p(request):
     if request.method == 'POST':
         logout(request)

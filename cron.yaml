@@ -1,4 +1,4 @@
 cron:
 - description: "count all products in warehouse"
-  url: /login/raport
+  url: /login/task
   schedule: every 10 minutes
