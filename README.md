@@ -9,7 +9,7 @@ Simple application which allow to order meals if you are a customer or managing 
 1. git clone https://github.com/Nezale/Cloud_Warehouse_Project.git
 ```
 ```
-2. cd booktask
+2. cd Cloud_Warehouse_Project
 ```
 ```
 3. pip install -r requirements.txt
