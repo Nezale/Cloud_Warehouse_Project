@@ -27,10 +27,6 @@ Simple application which allow to order meals if you are a customer or managing 
 ```
 solwit-pjatk-arc-2018-gr2.appspot.com
 ```
-### Repo
-```
-https://source.cloud.google.com/solwit-pjatk-arc-2018-gr2/booktask
-```
 
 ### How to report bugs
 + Send email to s15715@pjwstk.edu.pl, with title: "Warehouse bugs"
