@@ -22,6 +22,7 @@
       }
     </style>
 </head>
+<body>
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
     <a class="navbar-brand" href="/login/">
         <span style="font-size: 20px;">
@@ -50,7 +51,7 @@
         </ul>
     </div>
     </nav>
-<body>
+<div>
     {% include 'messages.html' %}
     <br>
       <div class="col-md-8 col-xs-12">
@@ -73,7 +74,7 @@
         </table>
         <button onclick="toggleDisplay();" class="btn btn-warning" style="width: 100%;">Checkout with a credit card</button>
       </div>
-
+</div>
 
 <div id="collapseStripe" class="wrapper">
   <script src="https://js.stripe.com/v3/"></script>

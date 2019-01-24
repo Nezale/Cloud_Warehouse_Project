@@ -12,6 +12,7 @@
     {% block style %}{% endblock style %}
 
 </head>
+<body>
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
     <a class="navbar-brand" href="/login/">
         <span style="font-size: 20px;">
@@ -40,7 +41,7 @@
         </ul>
     </div>
     </nav>
-<body>
+<div>
     {% include 'messages.html' %}
     <div class="container">
         {% block content %}{% endblock content %}
@@ -50,7 +51,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
     {% block script %}{% endblock script %}
-</body>
+</div>
 
 <div class="footer">
         <footer>
@@ -84,5 +85,5 @@
             </div>
         </footer>
 </div>
-
+</body>
 </html>
