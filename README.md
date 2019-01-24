@@ -1,5 +1,17 @@
 # Cloud warehouse
 Simple application which allow to order meals if you are a customer or managing components and meals if you have worker permissions
+### Used technologies
+
+##### Google cloud
++ App engine
++ Cloud storage
++ Cloud SQL
+##### Python
+##### Django
+##### HTML5
+##### CSS3
+##### Bootstrap
+
 ### How to start
 ##### Requirements:
 + installed python
