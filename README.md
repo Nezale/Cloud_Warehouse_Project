@@ -35,16 +35,12 @@ Simple application which allow to order meals if you are a customer or managing 
 ```
 6. python manage.py runserver
 ```
-### Test app
-```
-solwit-pjatk-arc-2018-gr2.appspot.com
-```
 ### Cards for testing
 4012000033330026	
 4012000077777777
 
 ### How to report bugs
-+ Send email to s15715@pjwstk.edu.pl, with title: "Warehouse bugs"
++ Send email to nezale456@gmail.com, with title: "Warehouse bugs"
 + Template for description:
     + Explain the bug in a few words. Share it in easy-to-understand language,
     + Write us your environment: depending on your browser, operating system, zoom level and screen size, websites may behave differently from one environment to another,
